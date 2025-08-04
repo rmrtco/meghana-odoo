@@ -1,0 +1,164 @@
+<odoo>
+  <data>
+    <record id="view_queue_item_tree" model="ir.ui.view">
+        <field name="name">marvel.queue.item.tree</field>
+        <field name="model">marvel.queue.item</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="flow_name"/>
+                <field name="create_date"/>
+                <field name="closed_date"/>
+                <field name="priority"/>
+                <field name="is_clossed"/>
+                <field name="is_deleted"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_queue_item_form" model="ir.ui.view">
+        <field name="name">marvel.queue.item.form</field>
+        <field name="model">marvel.queue.item</field>
+        <field name="arch" type="xml">
+            <form string="Queue Item">
+                <sheet>
+                    <group>
+                        <field name="flow_name"/>
+                        <field name="create_date"/>
+                        <field name="closed_date"/>
+                        <field name="priority"/>
+                        <field name="created_by"/>
+                        <field name="is_clossed"/>
+                        <field name="is_deleted"/>
+                        <field name="fields_data"/>
+                    </group>
+                    <notebook>
+                        <page string="Statuses">
+                            <field name="statuses_ids">
+                                <tree editable="bottom">
+                                    <field name="status"/>
+                                    <field name="owner"/>
+                                    <field name="start_time"/>
+                                    <field name="is_current"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_queue_status_tree" model="ir.ui.view">
+        <field name="name">marvel.queue.status.tree</field>
+        <field name="model">marvel.queue.status</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="status"/>
+                <field name="token_id"/>
+                <field name="owner"/>
+                <field name="start_time"/>
+                <field name="end_time"/>
+                <field name="is_current"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_queue_status_form" model="ir.ui.view">
+        <field name="name">marvel.queue.status.form</field>
+        <field name="model">marvel.queue.status</field>
+        <field name="arch" type="xml">
+            <form string="Queue Status">
+                <sheet>
+                    <group>
+                        <field name="status"/>
+                        <field name="token_id"/>
+                        <field name="owner"/>
+                        <field name="previous_owner"/>
+                        <field name="start_time"/>
+                        <field name="end_time"/>
+                        <field name="is_current"/>
+                        <field name="prossesing_stage"/>
+                        <field name="notes"/>
+                        <field name="escalated"/>
+                        <field name="reopen_count"/>
+                        <field name="is_deleted"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_blocked_attribute_value_tree" model="ir.ui.view">
+        <field name="name">marvel.blocked.attribute.value.tree</field>
+        <field name="model">marvel.blocked.attribute.value</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="parameter"/>
+                <field name="value"/>
+                <field name="created_by"/>
+                <field name="created_at"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_blocked_attribute_value_form" model="ir.ui.view">
+        <field name="name">marvel.blocked.attribute.value.form</field>
+        <field name="model">marvel.blocked.attribute.value</field>
+        <field name="arch" type="xml">
+            <form string="Blocked Attribute Value">
+                <sheet>
+                    <group>
+                        <field name="parameter"/>
+                        <field name="value"/>
+                        <field name="created_by"/>
+                        <field name="created_at"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    
+    <record id="action_queue_item" model="ir.actions.act_window">
+        <field name="name">Queue Items</field>
+        <field name="res_model">marvel.queue.item</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem id="menu_marvel_root" name="Marvel" sequence="10"/>
+
+        <record id="action_queue_item" model="ir.actions.act_window">
+        <field name="name">Queue Items</field>
+        <field name="res_model">marvel.queue.item</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem id="menu_queue_item" name="Queue Items"
+            parent="menu_marvel_root"
+            action="action_queue_item"
+            sequence="10"/>
+    
+    <record id="action_queue_status" model="ir.actions.act_window">
+        <field name="name">Queue Statuses</field>
+        <field name="res_model">marvel.queue.status</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem id="menu_queue_status" name="Queue Statuses"
+            parent="menu_marvel_root"
+            action="action_queue_status"
+            sequence="20"/>
+
+    <record id="action_blocked_attribute_value" model="ir.actions.act_window">
+        <field name="name">Blocked Values</field>
+        <field name="res_model">marvel.blocked.attribute.value</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+marvel.
+    <menuitem id="menu_blocked_attribute_value" name="Blocked Attribute Values"
+            parent="menu_marvel_root"
+            action="action_blocked_attribute_value"
+            sequence="30"/>
+        
+  </data>
+</odoo>

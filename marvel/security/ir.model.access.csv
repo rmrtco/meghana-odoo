@@ -1,0 +1,7 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_marvel_queue_item_all,marvel.queue.item all,model_marvel_queue_item,base.group_user,1,1,0,0
+access_marvel_queue_item_creator,marvel.queue.item creator,model_marvel_queue_item,marvel.group_marvel_sales,0,0,1,0
+access_marvel_queue_item_creator_finance,marvel.queue.item creator finance,model_marvel_queue_item,marvel.group_marvel_finance,0,0,1,0
+access_marvel_queue_item_creator_ops,marvel.queue.item creator ops,model_marvel_queue_item,marvel.group_marvel_operations,0,0,1,0
+access_marvel_queue_status,marvel.queue.status all,model_marvel_queue_status,base.group_user,1,1,1,0
+access_marvel_blocked_attribute_value,marvel.blocked.attribute.value all,model_marvel_blocked_attribute_value,base.group_user,1,1,1,0

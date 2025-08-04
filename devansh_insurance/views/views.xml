@@ -1,0 +1,106 @@
+<odoo>
+  <data>
+    <record id="res_partner_custom_fields" model="ir.ui.view">
+        <field name="name">res.partner.form.inherit.after.vat</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="arch" type="xml">
+            <field name="vat" position="after">
+                <field name="pan_number"/>
+                <field name="aadhaar_number"/>
+            </field>
+        </field>
+    </record>
+
+    <record id="view_vehicle_tree" model="ir.ui.view">
+        <field name="name">devansh_insurance.vehicle.tree</field>
+        <field name="model">devansh_insurance.vehicle</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="make"/>
+                <field name="model"/>
+                <field name="idv"/>
+                <field name="invoice_date"/>
+                <field name="policy_from"/>
+                <field name="policy_till"/>
+                <field name="owner_id"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_vehicle_form" model="ir.ui.view">
+        <field name="name">devansh_insurance.vehicle.form</field>
+        <field name="model">devansh_insurance.vehicle</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="make"/>
+                        <field name="model"/>
+                        <field name="idv"/>
+                    </group>
+                    <group>
+                        <field name="invoice_date"/>
+                        <field name="chassis_no"/>
+                        <field name="engine_no"/>
+                    </group>
+                    <group>
+                        <field name="policy_from"/>
+                        <field name="policy_till"/>
+                        <field name="owner_id"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_vehicle" model="ir.actions.act_window">
+        <field name="name">Vehicles</field>
+        <field name="res_model">devansh_insurance.vehicle</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create the first vehicle
+            </p>
+        </field>
+    </record>
+
+    <record id="view_partner_form_add_vehicles_tab" model="ir.ui.view">
+        <field name="name">res.partner.form.vehicles.tab</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="arch" type="xml">
+          <xpath expr="//notebook[1]/page[1]" position="before">
+              <page string="Vehicles" name="vehicles_page">
+                  <field name="vehicle_ids" mode="tree,form">
+                      <tree>
+                          <field name="make"/>
+                          <field name="model"/>
+                          <field name="idv"/>
+                          <field name="invoice_date"/>
+                          <field name="policy_from"/>
+                          <field name="policy_till"/>
+                      </tree>
+                  </field>
+              </page>
+          </xpath>
+        </field>
+    </record>
+
+     <record id="view_partner_form_rename_vat" model="ir.ui.view">
+        <field name="name">res.partner.form.rename.vat.to.gst</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="arch" type="xml">
+            <field name="vat" position="attributes">
+                <attribute name="string">GST</attribute>
+            </field>
+        </field>
+    </record>
+    
+    <menuitem id="menu_vehicle_root" name="Insurance"/>
+    <menuitem id="menu_vehicle" name="Vehicles" parent="menu_vehicle_root"/>
+    <menuitem id="menu_vehicle_items" name="Vehicle Records" parent="menu_vehicle" action="action_vehicle"/>
+    
+  </data>
+</odoo>

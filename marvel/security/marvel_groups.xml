@@ -1,0 +1,42 @@
+<odoo>
+    <data noupdate="0">
+
+        <!-- Custom Role Category -->
+        <record id="module_category_marvel" model="ir.module.category">
+            <field name="name">Marvel Access Roles</field>
+            <field name="description">Roles specific to Marvel processes</field>
+            <field name="sequence">100</field>
+        </record>
+
+        <!-- Marvel - Sales Role -->
+        <record id="group_marvel_sales" model="res.groups">
+            <field name="name">Marvel Sales</field>
+            <field name="category_id" ref="marvel.module_category_marvel"/>
+        </record>
+
+        <!-- Marvel - Handling Role -->
+        <record id="group_marvel_handling" model="res.groups">
+            <field name="name">Marvel Handling</field>
+            <field name="category_id" ref="marvel.module_category_marvel"/>
+        </record>
+
+        <!-- Marvel - Finance Role -->
+        <record id="group_marvel_finance" model="res.groups">
+            <field name="name">Marvel Finance</field>
+            <field name="category_id" ref="marvel.module_category_marvel"/>
+        </record>
+
+        <!-- Marvel - Operations Role -->
+        <record id="group_marvel_operations" model="res.groups">
+            <field name="name">Marvel Operations</field>
+            <field name="category_id" ref="marvel.module_category_marvel"/>
+        </record>
+
+        <!-- Marvel - Quality Assurance Role -->
+        <record id="group_marvel_qa" model="res.groups">
+            <field name="name">Marvel Quality Assurance</field>
+            <field name="category_id" ref="marvel.module_category_marvel"/>
+        </record>
+
+    </data>
+</odoo>
