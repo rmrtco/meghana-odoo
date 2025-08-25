@@ -103,11 +103,14 @@ export class ImageCapture extends Component {
     }
     async OnClickOpenCamera() {
         // opening the camera for capture the image
-        var self = this;
-        console.log(this);
-        var player = document.getElementById('player');
-        var captureButton = document.getElementById('capture');
-        var camera = document.getElementById('camera');
+        var component = document.querySelector('div[name="'+ this.props.id +'"].o_field_widget.o_field_capture_image');
+        console.log("html component :" + component);
+        // var player = document.getElementById('player');
+        var player = document.querySelector(".image-capture-player");
+        // var captureButton = document.getElementById('capture');
+        var captureButton = document.querySelector('.image-capture-capture');
+        // var camera = document.getElementById('camera');
+        var camera = document.querySelector('.image-capture-camera');
         player.classList.remove('d-none');
         captureButton.classList.remove('d-none');
         camera.classList.add('d-none');
@@ -117,14 +120,21 @@ export class ImageCapture extends Component {
     }
 
     async OnClickCaptureImage() {
-        var self = this;
-        console.log(this);
-        var player = document.getElementById('player');
-        var snapshot = document.getElementById('snapshot');
-        var save_image = document.getElementById('save_image');
-        var image = document.getElementById('image');
-        var camera = document.getElementById('camera');
-        var canvas = document.getElementById('snapshot');
+        var component = document.querySelector('div[name="'+ this.props.id +'"].o_field_widget.o_field_capture_image');
+        // console.log("html component :" + component);
+        // var player = document.getElementById('player');
+        // var snapshot = document.getElementById('snapshot');
+        // var save_image = document.getElementById('save_image');
+        // var image = document.getElementById('image');
+        // var camera = document.getElementById('camera');
+        // var canvas = document.getElementById('snapshot');
+
+        var player = document.querySelector('.image-capture-player');
+        var snapshot = document.querySelector('.image-capture-snapshot');
+        var save_image = document.querySelector('.image-capture-save-image');
+        var image = document.querySelector('.image-capture-image');
+        var camera = document.querySelector('.image-capture-camera');
+        var canvas = document.querySelector('.image-capture-snapshot');
 
         if (!player || !snapshot || !canvas || !save_image || !image) {
             this.notification.add(_lt("Camera or canvas element not found. Please check widget setup."), { type: "danger" });
@@ -145,10 +155,12 @@ export class ImageCapture extends Component {
         // Saving the image to that field
         var self = this;
         console.log(this);
+        var component = document.querySelector('div[name="'+ this.props.id +'"].o_field_widget.o_field_capture_image');
+        console.log("html component :" + component);
         rpc.query({
             model: 'image.capture',
             method: 'action_save_image',
-            args: [[], this.url],
+            args: [[], this.url],f
         }).then(function(results){
             self.props.value = results
             var data = {
@@ -160,16 +172,34 @@ export class ImageCapture extends Component {
                 }
             self.onFileUploaded(data)
         })
-        var player = document.getElementById('player')
+        // var player = document.getElementById('player')
+        // player.classList.add('d-none');
+        // var snapshot = document.getElementById('snapshot')
+        // snapshot.classList.add('d-none');
+        // var capture = document.getElementById('capture')
+        // capture.classList.add('d-none');
+        // var save_image = document.getElementById('save_image')
+        // save_image.classList.add('d-none');
+        // var camera = document.getElementById('camera')
+        // camera.classList.remove('d-none');
+
+        var player = document.querySelector('.image-capture-player')
         player.classList.add('d-none');
-        var snapshot = document.getElementById('snapshot')
+        var snapshot = document.querySelector('.image-capture-snapshot')
         snapshot.classList.add('d-none');
-        var capture = document.getElementById('capture')
+        var capture = document.querySelector('.image-capture-capture')
         capture.classList.add('d-none');
-        var save_image = document.getElementById('save_image')
+        var save_image = document.querySelector('.image-capture-save-image')
         save_image.classList.add('d-none');
-        var camera = document.getElementById('camera')
+        var camera = document.querySelector('.image-capture-camera')
         camera.classList.remove('d-none');
+
+        var stream = player.srcObject;
+
+        if (stream) {
+            stream.getTracks().forEach(track => track.stop());
+            document.querySelector("video").srcObject = null; // clear video
+        }
     }
 
     onLoadFailed() {

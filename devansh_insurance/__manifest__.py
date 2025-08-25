@@ -20,12 +20,16 @@
     'version': '0.1',
 
     # any module necessary for this one to work correctly
-    'depends': ['base','contacts','image_capture_upload_widget'],
+    'depends': ['base','contacts'], #'image_capture_upload_widget'
     # always loaded
     'data': [
         'security/ir.model.access.csv',
-        'views/views.xml',
-        'views/templates.xml',
+        'views/views.xml'
     ],
-    'icon': 'devansh_insurance/static/img/icon.png',
+    'assets': {
+        'web.assets_backend': [
+            '/devansh_insurance/static/src/xml/templates.xml'
+        ],
+    },
+    'icon': '/devansh_insurance/static/src/img/icon.png',
 }
