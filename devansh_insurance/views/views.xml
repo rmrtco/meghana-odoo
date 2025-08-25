@@ -16,39 +16,158 @@
         <field name="name">devansh_insurance.vehicle.tree</field>
         <field name="model">devansh_insurance.vehicle</field>
         <field name="arch" type="xml">
-            <tree>
+            <tree string="Vehicles">
+                <field name="vehicle_registration_number"/>
+                <field name="mobile_number"/>
+                <field name="policy_expiry_date"/>
+                <field name="rc_number"/>
                 <field name="make"/>
                 <field name="model"/>
-                <field name="idv"/>
-                <field name="invoice_date"/>
-                <field name="policy_from"/>
-                <field name="policy_till"/>
                 <field name="owner_id"/>
             </tree>
         </field>
     </record>
 
+        <!-- Form View -->
     <record id="view_vehicle_form" model="ir.ui.view">
         <field name="name">devansh_insurance.vehicle.form</field>
         <field name="model">devansh_insurance.vehicle</field>
         <field name="arch" type="xml">
-            <form>
+            <form string="Vehicle Details">
                 <sheet>
                     <group>
-                        <field name="make"/>
-                        <field name="model"/>
-                        <field name="idv"/>
+                        <group>
+                            <field name="vehicle_registration_number"/>
+                            <field name="mobile_number"/>
+                            <field name="rc_number"/>
+                            <field name="make"/>
+                            <field name="model"/>
+                            <field name="policy_expiry_date"/>
+                        </group>
+                        <group>
+                            <field name="idv"/>
+                            <field name="invoice_date"/>
+                            <field name="policy_from"/>
+                            <field name="policy_till"/>
+                            <field name="owner_id"/>
+                        </group>
                     </group>
+
                     <group>
-                        <field name="invoice_date"/>
+                        <field name="address"/>
                         <field name="chassis_no"/>
                         <field name="engine_no"/>
                     </group>
-                    <group>
-                        <field name="policy_from"/>
-                        <field name="policy_till"/>
-                        <field name="owner_id"/>
-                    </group>
+                    <notebook>
+                        <page string="RC">
+                            <group>
+                                 <!-- <div class="o_binary_preview">
+                                    <group> -->
+                                <field name="rc_photo" filename="rc_photo_filename" widget="image"/>
+                                <field name="rc_photo_filename"  readonly="1"/>
+                                <button name="action_download_image" type="object" context="{'field_name': 'rc_photo'}" class="btn-primary btn-sm">
+                                     <i class="fa fa-download" aria-hidden="true"></i>
+                                </button>
+
+                            <!-- </group> -->
+                                     <!-- <div class="oe_title">
+                                        <t t-call="devansh_insurance.BinaryFilePreview">
+                                            <t t-set="field" t-value="'rc_photo'"/>
+                                            <t t-set="filename" t-value="'rc_photo_filename'"/>
+                                        </t>
+                                    </div> -->
+                                 <!-- </div> -->
+                            </group>
+                        </page>
+                        <page string="Previous Policy">
+                            <group>
+                                <field name="previous_year_policy_photo" filename="previous_year_policy_photo_filename" widget="image"/>
+                                <field name="previous_year_policy_photo_filename"  readonly="1"/>
+                                <button name="action_download_image" type="object" context="{'field_name': 'previous_year_policy_photo'}" class="btn-primary btn-sm">
+                                     <i class="fa fa-download" aria-hidden="true"></i>
+                                </button>
+                            </group>
+                        </page>
+                        <page string="Inspection Photos">
+                            <div class="o_row">
+                                <div class="o_col-3">
+                                    <div class="o_row">
+                                        <field name="inspection_photo_1" filename="inspection_photo_1_filename" widget="image"/>
+                                        <field name="inspection_photo_1_filename"  readonly="1"/>
+                                        <button name="action_download_image" type="object" context="{'field_name': 'inspection_photo_1'}" class="btn-primary btn-sm">
+                                            <i class="fa fa-download" aria-hidden="true"></i>
+                                        </button>
+                                     </div>
+                                </div>
+                                <div class="o_col-3">
+                                    <div class="o_row">
+                                        <field name="inspection_photo_2" filename="inspection_photo_2_filename" widget="image"/>
+                                         <field name="inspection_photo_2_filename"  readonly="1"/>
+                                        <button name="action_download_image" type="object" context="{'field_name': 'inspection_photo_2'}" class="btn-primary btn-sm">
+                                            <i class="fa fa-download" aria-hidden="true"></i>
+                                        </button>
+                                     </div>
+                                </div>
+                                <div class="o_col-3">
+                                    <div class="o_row">
+                                        <field name="inspection_photo_3" filename="inspection_photo_3_filename" widget="image"/>
+                                         <field name="inspection_photo_3_filename"  readonly="1"/>
+                                        <button name="action_download_image" type="object" context="{'field_name': 'inspection_photo_3'}" class="btn-primary btn-sm">
+                                            <i class="fa fa-download" aria-hidden="true"></i>
+                                        </button>
+                                     </div>
+                                </div>
+                                <div class="o_col-3">
+                                    <div class="o_row">
+                                        <field name="inspection_photo_4" filename="inspection_photo_4_filename"  widget="image"/>
+                                         <field name="inspection_photo_4_filename"  readonly="1"/>
+                                        <button name="action_download_image" type="object" context="{'field_name': 'inspection_photo_4'}" class="btn-primary btn-sm">
+                                            <i class="fa fa-download" aria-hidden="true"></i>
+                                        </button>
+                                     </div>
+                                </div>
+                            </div>
+
+                            <div class="o_row mt16">
+                                <div class="o_col-3">
+                                    <div class="o_row">
+                                        <field name="inspection_photo_5" filename="inspection_photo_5_filename" widget="image"/>
+                                         <field name="inspection_photo_5_filename"  readonly="1"/>
+                                        <button name="action_download_image" type="object" context="{'field_name': 'inspection_photo_5'}" class="btn-primary btn-sm">
+                                            <i class="fa fa-download" aria-hidden="true"></i>
+                                        </button>
+                                     </div>
+                                </div>
+                                <div class="o_col-3">
+                                    <div class="o_row">
+                                        <field name="inspection_photo_6" filename="inspection_photo_6_filename" widget="image"/>
+                                         <field name="inspection_photo_6_filename"  readonly="1"/>
+                                        <button name="action_download_image" type="object" context="{'field_name': 'inspection_photo_6'}" class="btn-primary btn-sm">
+                                            <i class="fa fa-download" aria-hidden="true"></i>
+                                        </button>
+                                     </div>
+                                </div>
+                                <div class="o_col-3">
+                                    <div class="o_row">
+                                        <field name="inspection_photo_7" filename="inspection_photo_7_filename" widget="image"/>
+                                         <field name="inspection_photo_7_filename"  readonly="1"/>
+                                        <button name="action_download_image" type="object" context="{'field_name': 'inspection_photo_7'}" class="btn-primary btn-sm">
+                                            <i class="fa fa-download" aria-hidden="true"></i>
+                                        </button>
+                                     </div>
+                                </div>
+                                <div class="o_col-3">
+                                    <div class="o_row">
+                                        <field name="inspection_photo_8" filename="inspection_photo_8_filename" widget="image"/>
+                                        <field name="inspection_photo_8_filename"  readonly="1"/>
+                                        <button name="action_download_image" type="object" context="{'field_name': 'inspection_photo_8'}" class="btn-primary btn-sm">
+                                            <i class="fa fa-download" aria-hidden="true"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </page>
+\                    </notebook>
                 </sheet>
             </form>
         </field>
@@ -70,7 +189,7 @@
         <field name="model">res.partner</field>
         <field name="inherit_id" ref="base.view_partner_form"/>
         <field name="arch" type="xml">
-          <xpath expr="//notebook[1]/page[1]" position="before">
+          <xpath expr="//notebook[1]" position="inside">
               <page string="Vehicles" name="vehicles_page">
                   <field name="vehicle_ids" mode="tree,form">
                       <tree>
@@ -83,9 +202,44 @@
                       </tree>
                   </field>
               </page>
+              <page string="Documents" name="docuemnts_page">
+                 <div class="o_row">
+                    <div class="o_col-3">
+                        <div class="o_row">
+                            Aadhar card :
+                            <field name="aadhar_card_image" filename="aadhar_card_image_filename" widget="image"/>
+                            <field name="aadhar_card_image_filename"  readonly="1"/>
+                            <button name="action_download_image" type="object" context="{'field_name': 'aadhar_card_image'}" class="btn-primary btn-sm">
+                                <i class="fa fa-download" aria-hidden="true"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="o_col-3">
+                        <div class="o_row">
+                            Pan card :
+                            <field name="pan_card_image" filename="pan_card_image_filename" widget="image"/>
+                            <field name="pan_card_image_filename"  readonly="1"/>
+                            <button name="action_download_image" type="object" context="{'field_name': 'pan_card_image'}" class="btn-primary btn-sm">
+                                <i class="fa fa-download" aria-hidden="true"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </page>
           </xpath>
         </field>
     </record>
+
+    <!-- <record id="view_partner_form_add_vehicles_tab" model="ir.ui.view">
+        <field name="name">res.partner.form.vehicles.tab</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="arch" type="xml">
+          <xpath expr="//notebook[1]" position="inside">
+
+          </xpath>
+        </field>
+    </record> -->
 
      <record id="view_partner_form_rename_vat" model="ir.ui.view">
         <field name="name">res.partner.form.rename.vat.to.gst</field>
@@ -97,8 +251,27 @@
             </field>
         </field>
     </record>
+
+    <record id="view_partner_form_inherit_replace_image" model="ir.ui.view">
+        <field name="name">res.partner.form.replace.image</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="arch" type="xml">
+            <!-- Replace the avatar image field -->
+            <xpath expr="//field[@name='image_1920']" position="replace">
+                <div class="oe_avatar">
+                    <div>
+                        <field name="image_1920" class="oe_avatar" widget="image" options="{'preview_image': 'avatar_128'}"/>
+                    </div>
+                    <button type="object" name="action_download_image" class="btn-secondary btn-sm">
+                        <i class="fa fa-download" aria-hidden="true"></i>
+                    </button>
+                </div>
+            </xpath>
+        </field>
+    </record>
     
-    <menuitem id="menu_vehicle_root" name="Insurance"/>
+    <menuitem id="menu_vehicle_root" name="Vehicle Details"/>
     <menuitem id="menu_vehicle" name="Vehicles" parent="menu_vehicle_root"/>
     <menuitem id="menu_vehicle_items" name="Vehicle Records" parent="menu_vehicle" action="action_vehicle"/>
     

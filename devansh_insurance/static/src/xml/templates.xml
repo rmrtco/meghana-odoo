@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<templates id="vehicle_templates" xml:space="preserve">
+
+    <!-- Reusable template for binary field preview -->
+    <t t-name="devansh_insurance.BinaryFilePreview" owl="1">
+
+    <t t-set="fname" t-value="filename"/>
+    <t t-set="fld" t-value="field"/>
+
+
+        <!-- <div t-if="props.record and props.record.data[fld]"> -->
+            
+            <!-- If image -->
+            <!-- <t t-if="props.record.data[filename] and (
+                        props.record.data[filename].toLowerCase().endsWith('.jpg') or
+                        props.record.data[filename].toLowerCase().endsWith('.jpeg') or
+                        props.record.data[filename].toLowerCase().endsWith('.png') or
+                        props.record.data[filename].toLowerCase().endsWith('.gif')
+                    )"> -->
+                    <!-- <script>
+                        function refreshImage() {
+                        var image = document.getElementById("refresh-image");
+                        // Append a random number to force a fresh download
+                        image.src = image.src.split("?")[0] + "?r=" + Math.random();
+                        }
+
+                        // Refresh the image every 5 seconds (5000 milliseconds)
+                        setInterval(refreshImage, 5000);
+                    </script> -->
+
+                <!-- <img id="refresh-image" t-att-src="'/web/content/devansh_insurance.vehicle/' + props.record.data.id + '/' + fld"
+                     style="max-width:200px; max-height:200px; margin-top:10px;"/>
+            </t> -->
+
+            <!-- Otherwise: download link -->
+            <!-- <t> -->
+                <a t-att-href="'/web/content/devansh_insurance.vehicle/' + props.record.data.id + '/' + fld + '?download=true'"
+                   t-esc="props.record.data[filename]"
+                   target="_blank"
+                   style="margin-top:10px; display:block;">
+                    <!-- <t t-if="props.record.data[filename] and (
+                        props.record.data[filename].toLowerCase().endsWith('.pdf')">
+                      <img t-att-src="'/web/static/devansh_insurance/src/img/pdf-icon.png'"
+                      style="max-width:200px; max-height:200px; margin-top:10px;"/>
+                    </t>
+                    <t t-else="">
+                       <img t-att-src="'/web/static/devansh_insurance/src/img/file-icon.png'"
+                      style="max-width:200px; max-height:200px; margin-top:10px;"/>
+                    </t> -->
+                </a>
+            <!-- </t> -->
+        <!-- </div> -->
+    </t>
+
+</templates>
