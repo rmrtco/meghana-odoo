@@ -12,10 +12,10 @@ class Vehicle(models.Model):
     mobile_number=fields.Char(min=6,max=36, string="Mobile Number", required=True)
     policy_expiry_date = fields.Date(string="Policy Expiry Date")
     address = fields.Text(string="Address")
-    previous_year_policy_photo = fields.Binary(string="Privious Year Policy Image",attachment=True)
+    previous_year_policy_photo = fields.Binary(string="Privious Year Policy Image",attachment=True, filename="previous_year_policy_photo_filename")
     previous_year_policy_photo_filename = fields.Char(string="Privious Year Policy Image Filename")
     rc_number = fields.Char(min=6,max=36, string="RC Number", required=True)
-    rc_photo = fields.Binary(string="RC Image",attachment=True)
+    rc_photo = fields.Binary(string="RC Image",attachment=True, filename="rc_photo_filename")
     rc_photo_filename = fields.Char(string="RC Image Filename")
     make = fields.Char(min=6,max=255, string="Make", required=True)
     model = fields.Char(min=6,max=255, string= "Model", required=True)
@@ -26,22 +26,52 @@ class Vehicle(models.Model):
     policy_from = fields.Date(string="Policy From")
     policy_till = fields.Date(string="Policy Up To")
     owner_id = fields.Many2one('res.partner', string='Owner')
-    inspection_photo_1 = fields.Binary(string="Inspection photo 1",attachment=True)
+    inspection_photo_1 = fields.Binary(string="Inspection photo 1",attachment=True, filename="inspection_photo_1_filename")
     inspection_photo_1_filename = fields.Char(string="Inspection photo 1 Filename")
-    inspection_photo_2 = fields.Binary(string="Inspection photo 2",attachment=True)
+    inspection_photo_2 = fields.Binary(string="Inspection photo 2",attachment=True, filename="inspection_photo_2_filename")
     inspection_photo_2_filename = fields.Char(string="RInspection photo 2 Filename")
-    inspection_photo_3 = fields.Binary(string="Inspection photo 3",attachment=True)
+    inspection_photo_3 = fields.Binary(string="Inspection photo 3",attachment=True, filename="inspection_photo_3_filename")
     inspection_photo_3_filename = fields.Char(string="Inspection photo 3 Filename")
-    inspection_photo_4 = fields.Binary(string="Inspection photo 4",attachment=True)
+    inspection_photo_4 = fields.Binary(string="Inspection photo 4",attachment=True, filename="inspection_photo_4_filename")
     inspection_photo_4_filename = fields.Char(string="Inspection photo 4 Filename")
-    inspection_photo_5 = fields.Binary(string="Inspection photo 5",attachment=True)
+    inspection_photo_5 = fields.Binary(string="Inspection photo 5",attachment=True, filename="inspection_photo_5_filename")
     inspection_photo_5_filename = fields.Char(string="Inspection photo 5 Filename")
-    inspection_photo_6 = fields.Binary(string="Inspection photo 6",attachment=True)
+    inspection_photo_6 = fields.Binary(string="Inspection photo 6",attachment=True, filename="inspection_photo_6_filename")
     inspection_photo_6_filename = fields.Char(string="Inspection photo 6 Filename")
-    inspection_photo_7 = fields.Binary(string="Inspection photo 7",attachment=True)
+    inspection_photo_7 = fields.Binary(string="Inspection photo 7",attachment=True, filename="inspection_photo_7_filename")
     inspection_photo_7_filename = fields.Char(string="Inspection photo 7 Filename")
-    inspection_photo_8 = fields.Binary(string="Inspection photo 8",attachment=True)
+    inspection_photo_8 = fields.Binary(string="Inspection photo 8",attachment=True, filename="inspection_photo_8_filename")
     inspection_photo_8_filename = fields.Char(string="Inspection photo 8 Filename")
+
+    # @api.onchange(
+    #         'rc_photo',
+    #         'previous_year_policy_photo',
+    #         'inspection_photo_1',
+    #         'inspection_photo_2',
+    #         'inspection_photo_3',
+    #         'inspection_photo_4',
+    #         'inspection_photo_5',
+    #         'inspection_photo_6',
+    #         'inspection_photo_7',
+    #         'inspection_photo_8'
+    #     )
+    # def _onchange_photos(self):
+    #     """Handle filename update for all binary fields at once"""
+    #     for field_name in [
+    #         'rc_photo',
+    #         'previous_year_policy_photo',
+    #         'inspection_photo_1',
+    #         'inspection_photo_2',
+    #         'inspection_photo_3',
+    #         'inspection_photo_4',
+    #         'inspection_photo_5',
+    #         'inspection_photo_6',
+    #         'inspection_photo_7',
+    #         'inspection_photo_8'
+    #         ]:
+    #         if getattr(self, field_name):
+    #             filename_field = f"{field_name}_filename"
+    #             setattr(self, filename_field, self._context.get('filename'))
 
 
     def action_download_image(self):

@@ -1,10 +1,7 @@
 # -*- coding: utf-8 -*-
 ################################################################################
 #
-#    Cybrosys Technologies Pvt. Ltd.
-#
-#    Copyright (C) 2023-TODAY Cybrosys Technologies(<https://www.cybrosys.com>).
-#    Author: Megha K (odoo@cybrosys.com)
+#    Author: Rakshith M R (Original Module was developped by Megha K (odoo@cybrosys.com))
 #
 #    You can modify it under the terms of the GNU AFFERO
 #    GENERAL PUBLIC LICENSE (AGPL v3), Version 3.
@@ -27,10 +24,10 @@
     'sequence': '20',
     'summary': 'Image Capture Widget for Image Field. '
                'This module allows to capture the users image from the webcam.',
-    'author': 'Cybrosys Techno Solutions',
-    'maintainer': 'Cybrosys Techno Solutions',
-    'company': 'Cybrosys Techno Solutions',
-    'website': 'https://www.cybrosys.com',
+    'author': 'Rakshith M R',
+    'maintainer': 'Rakshith M R',
+    # 'company': 'Cybrosys Techno Solutions',
+    # 'website': 'https://www.cybrosys.com',
     'description': "This module is used to add Image Capture Widget for Image "
                    "Field. We can capture the image from the webcam and "
                    "upload into the binary field",
