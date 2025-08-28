@@ -22,7 +22,7 @@ export const fileTypeMagicWordMap = {
 };
 
 const placeholder = "/web/static/img/placeholder.png";
-const pdfPlaceHolder = "/image_capture_upload_widget/static/img/pdf-icon.png"
+// const pdfPlaceHolder = "/image_capture_upload_widget/static/img/pdf-icon.png"
 
 export function imageCacheKey(value) {
     if (value instanceof DateTime) {
@@ -79,8 +79,8 @@ export class ImageCapture extends Component {
                     unique: imageCacheKey(this.rawCacheKey),
                 });
             } else {
-                if(this.props.value[0] == "J")
-                    return pdfPlaceHolder;
+                // if(this.props.value[0] == "J")
+                //     return pdfPlaceHolder;
                 // Use magic-word technique for detecting image type
                 const magic = fileTypeMagicWordMap[this.props.value[0]] || "png";
                 return `data:image/${magic};base64,${this.props.value}`;
