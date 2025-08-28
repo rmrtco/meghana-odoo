@@ -22,6 +22,7 @@ export const fileTypeMagicWordMap = {
 };
 
 const placeholder = "/web/static/img/placeholder.png";
+// const pdfPlaceHolder = "/image_capture_upload_widget/static/img/pdf-icon.png"
 
 export function imageCacheKey(value) {
     if (value instanceof DateTime) {
@@ -64,6 +65,7 @@ export class ImageCapture extends Component {
     }
 
     getUrl(previewFieldName) {
+        console.log(this.props);
         // getting the details and url of the image
         if (this.state.isValid && this.props.value) {
             if (isBinarySize(this.props.value)) {
@@ -77,6 +79,8 @@ export class ImageCapture extends Component {
                     unique: imageCacheKey(this.rawCacheKey),
                 });
             } else {
+                // if(this.props.value[0] == "J")
+                //     return pdfPlaceHolder;
                 // Use magic-word technique for detecting image type
                 const magic = fileTypeMagicWordMap[this.props.value[0]] || "png";
                 return `data:image/${magic};base64,${this.props.value}`;
@@ -90,51 +94,61 @@ export class ImageCapture extends Component {
         this.props.update(false);
     }
     onFileUploaded(info) {
+        console.log(info)
+        console.log(this.props)
+
+        // const filenameField = `${this.props.name}_filename`;  
+
+        // var propName = this.props.name
         // Upload the images
         this.state.isValid = true;
         this.rawCacheKey = null;
-        this.props.update(info.data);
+        this.props.update(info.data)
+        // rpc.query({
+        //     model: this.props.record.resModel,
+        //     method: 'write',
+        //     args: [[this.res_id], { [filenameField]: info.name }],
+        // }).then(() => {
+        //     this.props.update(info.data)
+        // });
+
+
+
+        // networkrpc("/web/dataset/call_kw/"+ this.props.record.resModel +"/write", {
+        //     model: this.props.record.resModel,
+        //     method: "write",
+        //     args: [[this.props.record.data.id], { propName : info.name }],
+        //     kwargs: {},
+        // }).then(function(results){ 
+        //     this.props.update(info.data)
+        // });
+        
     }
     onFileCaptureImage() {
-        // Open a window for open the image and capture it
         var field = this.props.name;
         var id = this.props.record.data.id;
         var model = this.props.record.resModel;
     }
     async OnClickOpenCamera() {
-        // opening the camera for capture the image
         var component = document.querySelector('div[name="'+ this.props.id +'"].o_field_widget.o_field_capture_image');
-        console.log("html component :" + component);
-        // var player = document.getElementById('player');
-        var player = document.querySelector(".image-capture-player");
-        // var captureButton = document.getElementById('capture');
-        var captureButton = document.querySelector('.image-capture-capture');
-        // var camera = document.getElementById('camera');
-        var camera = document.querySelector('.image-capture-camera');
+        var player = component.querySelector(".image-capture-player");
+        var captureButton = component.querySelector('.image-capture-capture');
+        var camera = component.querySelector('.image-capture-camera');
         player.classList.remove('d-none');
         captureButton.classList.remove('d-none');
         camera.classList.add('d-none');
         let stream = await navigator.mediaDevices.getUserMedia({ video: true, audio: false });
-        console.log("stream", stream)
 	    player.srcObject = stream;
     }
 
     async OnClickCaptureImage() {
         var component = document.querySelector('div[name="'+ this.props.id +'"].o_field_widget.o_field_capture_image');
-        // console.log("html component :" + component);
-        // var player = document.getElementById('player');
-        // var snapshot = document.getElementById('snapshot');
-        // var save_image = document.getElementById('save_image');
-        // var image = document.getElementById('image');
-        // var camera = document.getElementById('camera');
-        // var canvas = document.getElementById('snapshot');
-
-        var player = document.querySelector('.image-capture-player');
-        var snapshot = document.querySelector('.image-capture-snapshot');
-        var save_image = document.querySelector('.image-capture-save-image');
-        var image = document.querySelector('.image-capture-image');
-        var camera = document.querySelector('.image-capture-camera');
-        var canvas = document.querySelector('.image-capture-snapshot');
+        var player = component.querySelector('.image-capture-player');
+        var snapshot = component.querySelector('.image-capture-snapshot');
+        var save_image = component.querySelector('.image-capture-save-image');
+        var image = component.querySelector('.image-capture-image');
+        var camera = component.querySelector('.image-capture-camera');
+        var canvas = component.querySelector('.image-capture-snapshot');
 
         if (!player || !snapshot || !canvas || !save_image || !image) {
             this.notification.add(_lt("Camera or canvas element not found. Please check widget setup."), { type: "danger" });
@@ -154,13 +168,11 @@ export class ImageCapture extends Component {
     async OnClickSaveImage(){
         // Saving the image to that field
         var self = this;
-        console.log(this);
         var component = document.querySelector('div[name="'+ this.props.id +'"].o_field_widget.o_field_capture_image');
-        console.log("html component :" + component);
         rpc.query({
             model: 'image.capture',
             method: 'action_save_image',
-            args: [[], this.url],f
+            args: [[], this.url]
         }).then(function(results){
             self.props.value = results
             var data = {
@@ -172,33 +184,23 @@ export class ImageCapture extends Component {
                 }
             self.onFileUploaded(data)
         })
-        // var player = document.getElementById('player')
-        // player.classList.add('d-none');
-        // var snapshot = document.getElementById('snapshot')
-        // snapshot.classList.add('d-none');
-        // var capture = document.getElementById('capture')
-        // capture.classList.add('d-none');
-        // var save_image = document.getElementById('save_image')
-        // save_image.classList.add('d-none');
-        // var camera = document.getElementById('camera')
-        // camera.classList.remove('d-none');
 
-        var player = document.querySelector('.image-capture-player')
+        var player = component.querySelector('.image-capture-player')
         player.classList.add('d-none');
-        var snapshot = document.querySelector('.image-capture-snapshot')
+        var snapshot = component.querySelector('.image-capture-snapshot')
         snapshot.classList.add('d-none');
-        var capture = document.querySelector('.image-capture-capture')
+        var capture = component.querySelector('.image-capture-capture')
         capture.classList.add('d-none');
-        var save_image = document.querySelector('.image-capture-save-image')
+        var save_image = component.querySelector('.image-capture-save-image')
         save_image.classList.add('d-none');
-        var camera = document.querySelector('.image-capture-camera')
+        var camera = component.querySelector('.image-capture-camera')
         camera.classList.remove('d-none');
 
         var stream = player.srcObject;
 
         if (stream) {
             stream.getTracks().forEach(track => track.stop());
-            document.querySelector("video").srcObject = null; // clear video
+            component.querySelector("video").srcObject = null; // clear video
         }
     }
 
@@ -224,6 +226,7 @@ ImageCapture.props = {
     height: { type: Number, optional: true },
 };
 ImageCapture.defaultProps = {
+    // acceptedFileExtensions: "image/*,application/pdf", 
     acceptedFileExtensions: "image/*",
 };
 
