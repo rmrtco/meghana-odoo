@@ -9,7 +9,6 @@ import { isBinarySize } from "@web/core/utils/binary";
 import rpc from 'web.rpc';
 import { FileUploader } from "@web/views/fields/file_handler";
 import { standardFieldProps } from "@web/views/fields/standard_field_props";
-// import { networkrpc } from "@web/core/network/rpc";
 
 
 import { Component, useState, onWillUpdateProps } from "@odoo/owl";
@@ -97,10 +96,24 @@ export class ImageCapture extends Component {
     onFileUploaded(info) {
         console.log(info)
         console.log(this.props)
+
+        // const filenameField = `${this.props.name}_filename`;  
+
         // var propName = this.props.name
         // Upload the images
         this.state.isValid = true;
         this.rawCacheKey = null;
+        this.props.update(info.data)
+        // rpc.query({
+        //     model: this.props.record.resModel,
+        //     method: 'write',
+        //     args: [[this.res_id], { [filenameField]: info.name }],
+        // }).then(() => {
+        //     this.props.update(info.data)
+        // });
+
+
+
         // networkrpc("/web/dataset/call_kw/"+ this.props.record.resModel +"/write", {
         //     model: this.props.record.resModel,
         //     method: "write",
